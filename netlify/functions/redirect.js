@@ -1,7 +1,8 @@
 // netlify/functions/redirect.js
 const https = require('https');
 
-const GIST_RAW = 'https://gist.githubusercontent.com/loictrobas/284df6b2f13698ce30a0a2526e5d9877/raw/6c09a84436b6ca237a2897b98130d93bc398eba4/gistfile1.txt';
+// IMPORTANTE: usá la URL RAW SIN HASH
+const GIST_RAW = 'https://gist.githubusercontent.com/loictrobas/284df6b2f13698ce30a0a2526e5d9877/raw/redirect.txt';
 
 function getText(url) {
   return new Promise((resolve, reject) => {
@@ -19,8 +20,9 @@ function getText(url) {
 
 exports.handler = async () => {
   try {
-    const raw = await getText(GIST_RAW);
-    // Limpieza y detección del primer URL válido
+    // agrego parámetro para evitar caché
+    const raw = await getText(`${GIST_RAW}?t=${Date.now()}`);
+
     const text = (raw || '').replace(/^\uFEFF/, '').trim();
     const match = text.match(/https?:\/\/\S+/i);
     const dest = match ? match[0].trim() : '';
@@ -29,8 +31,11 @@ exports.handler = async () => {
 
     return {
       statusCode: 302,
-      headers: { Location: dest },
-      body: '' // por compatibilidad con algunos navegadores
+      headers: {
+        Location: dest,
+        'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
+      },
+      body: ''
     };
   } catch (e) {
     return { statusCode: 500, body: 'Error leyendo destino: ' + e.message };
