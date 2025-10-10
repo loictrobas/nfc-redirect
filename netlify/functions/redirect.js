@@ -1,8 +1,8 @@
 // netlify/functions/redirect.js
 const https = require('https');
 
-// IMPORTANTE: usá la URL RAW SIN HASH
-const GIST_RAW = 'https://gist.githubusercontent.com/loictrobas/284df6b2f13698ce30a0a2526e5d9877/raw/redirect.txt';
+// Usar el nombre real del archivo del Gist:
+const GIST_RAW = 'https://gist.githubusercontent.com/loictrobas/284df6b2f13698ce30a0a2526e5d9877/raw/gistfile1.txt';
 
 function getText(url) {
   return new Promise((resolve, reject) => {
@@ -20,13 +20,10 @@ function getText(url) {
 
 exports.handler = async () => {
   try {
-    // agrego parámetro para evitar caché
-    const raw = await getText(`${GIST_RAW}?t=${Date.now()}`);
-
+    const raw = await getText(`${GIST_RAW}?t=${Date.now()}`); // cache-busting
     const text = (raw || '').replace(/^\uFEFF/, '').trim();
     const match = text.match(/https?:\/\/\S+/i);
     const dest = match ? match[0].trim() : '';
-
     if (!dest) return { statusCode: 500, body: 'Destino inválido' };
 
     return {
