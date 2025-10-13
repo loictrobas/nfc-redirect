@@ -4,28 +4,46 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title></title>
- <style>
-  html,body{height:100%;margin:0;background:#000}
-  .wrap{min-height:100%;display:flex;align-items:center;justify-content:center}
-  img{
-    width:100vw;
-    height:auto;
-    max-height:100vh;
-    display:block;
-  }
-  .tagline{
-    position:fixed;
-    left:0;right:0;bottom:14px;
-    text-align:center;
-    color:#fff;
-    font:500 12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-    opacity:.75;
-  }
+  <style>
+    html,body{
+      height:100%;
+      margin:0;
+      background:#000;
+      overflow:hidden;
+    }
+    .wrap{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    img{
+      width:auto;
+      height:auto;
+      transform:scale(2); /* 🔥 duplicar tamaño visual */
+      transform-origin:center center;
+      max-width:none;
+      max-height:none;
+    }
+    .tagline{
+      position:absolute;
+      bottom:20px;
+      left:0;right:0;
+      text-align:center;
+      color:#fff;
+      font:500 12px/1.2 system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      opacity:.75;
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <img src="/gif.gif" alt="gif" />
   </div>
+  <div class="tagline">El vicio se enciende y la fantasía empieza a moverse</div>
 </body>
 </html>
