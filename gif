@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title></title>
+  <style>
+    html,body{height:100%;margin:0;background:#000}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box}
+    img{max-width:95vw;max-height:95vh;width:auto;height:auto;display:block}
+    .tagline{position:fixed;left:0;right:0;bottom:14px;text-align:center;color:#fff;font:500 12px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Arial;opacity:.75}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <img src="/gif.gif" alt="gif" />
+  </div>
+  <!-- opcional: frase teaser abajo -->
+  <div class="tagline">El vicio se enciende y la fantasía empieza a moverse</div>
+</body>
+</html>
